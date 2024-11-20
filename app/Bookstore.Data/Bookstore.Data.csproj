@@ -49,12 +49,6 @@
       <Name>Bookstore.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\AWSSDK.Rekognition.3.7.400.53\analyzers\dotnet\cs\AWSSDK.Rekognition.CodeAnalysis.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.Rekognition.3.7.400.53\analyzers\dotnet\cs\SharedAnalysisCode.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.S3.3.7.406.2\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
-    <Analyzer Include="..\..\packages\AWSSDK.S3.3.7.406.2\analyzers\dotnet\cs\SharedAnalysisCode.dll" />
-  </ItemGroup>
   <Import Project="..\..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
   <Import Project="..\..\packages\Magick.NET-Q8-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q8-AnyCPU.targets" Condition="Exists('..\..\packages\Magick.NET-Q8-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q8-AnyCPU.targets')" />
 </Project>
