@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 
-namespace BobsBookstoreClassic.Data
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+
+namespace Bookstore.Data
 {
     public sealed class BookstoreConfiguration
     {
@@ -14,14 +15,15 @@ namespace BobsBookstoreClassic.Data
 
         private BookstoreConfiguration()
         {
-            foreach (string key in ConfigurationManager.AppSettings)
-            {
-                _appSettings[key] = ConfigurationManager.AppSettings[key];
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
 
-                if (Environment.GetEnvironmentVariable(key) != null)
-                {
-                    _appSettings[key] = Environment.GetEnvironmentVariable(key);
-                }
+            foreach (var kvp in configuration.AsEnumerable())
+            {
+                _appSettings[kvp.Key] = kvp.Value;
             }
         }
 
@@ -32,13 +34,12 @@ namespace BobsBookstoreClassic.Data
 
         public static string Get(string key)
         {
-            return Instance._appSettings[key];
+            return Instance._appSettings.TryGetValue(key, out var value) ? value : null;
         }
 
         public static T Get<T>(string key)
         {
-            var value = Instance._appSettings[key];
-
+            var value = Get(key);
             return (T)Convert.ChangeType(value, typeof(T));
         }
     }
