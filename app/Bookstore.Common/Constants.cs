@@ -1,4 +1,5 @@
-﻿namespace Bookstore.Common
+
+namespace Bookstore.Common
 {
     public static class Constants
     {
